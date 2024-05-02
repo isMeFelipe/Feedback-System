@@ -1,14 +1,24 @@
-const express = require("express")
-const app = express()
+// Requests
+    const express = require("express")
+    const app = express()
 
 
-app.get('/', (req,res) => {
-    res.send("Test")
-})
+// Config
 
 
 
-const  PORT = 8080
-app.listen(PORT, () => {
-    console.log("Conection in port: " + PORT)
-})
+
+
+// Routes
+    app.get('/', (req,res) => {
+        res.send("Test")
+    })
+
+
+
+
+// Local Server Connection
+    const  PORT = 8080
+    app.listen(PORT, () => {
+        console.log("Conection in port: " + PORT)
+    })
