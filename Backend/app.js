@@ -1,18 +1,51 @@
 // Requests
-    const express = require("express")
+    const express = require('express')
+    const handlebars = require('express-handlebars')
+    const bodyParser = require('body-parser')
     const app = express()
+    const admin = require('./routes/admin')
+    const user = require('./routes/admin')
+    const path = require('path')             // module to work with directorys
+    const mongoose = require('mongoose')
+    const flash = require("connect-flash")
 
+    require("./models/Admin")
+    const Admin = mongoose.model("admins")
 
 // Config
+    // Template Engine
+        app.engine('handlebars', handlebars.engine({
+            defaultLayout: 'main',
+            runtimeOptions: {
+                allowProtoPropertiesByDefault: true, // Para conseguir acessos 
+                allowProtoMethodsByDefault: true,    // Para conseguir acessos
+            },
+        }))
+        app.set('view engine', 'handlebars')
 
+
+        // Mongoose
+        mongoose.Promise = global.Promise;
+        mongoose.connect("mongodb://localhost/feedbacksystem").then(() => {
+            console.log("Conection sucess")
+        }).catch((err) => {
+            console.log("Conection error, ERRO: " + err)
+        })
 
 
 
 
 // Routes
-    app.get('/', (req,res) => {
-        res.send("Test")
-    })
+    // Testing
+        app.get('/', (req, res) => {
+            Admin.find().then((posts) => {
+                res.json(posts)
+            }).catch((err) => {
+                req.flash("error_msg", "There was a problem with initial page loading")
+                res.redirect("/404")
+            })
+        })
+        
 
 
 
