@@ -3,8 +3,10 @@
     const handlebars = require('express-handlebars')
     const bodyParser = require('body-parser')
     const app = express()
+    
     const admin = require('./routes/admin')
-    const user = require('./routes/admin')
+
+    const user = require('./routes/user')
     const path = require('path')             // module to work with directorys
     const mongoose = require('mongoose')
     const flash = require("connect-flash")
@@ -30,13 +32,22 @@
         app.set('view engine', 'handlebars')
 
 
-        // Mongoose
+    // Body Parser
+        app.use(express.urlencoded())
+        app.use(express.json())
+        
+
+    // Mongoose
         mongoose.Promise = global.Promise;
         mongoose.connect("mongodb://localhost/feedbacksystem").then(() => {
             console.log("Conection sucess")
         }).catch((err) => {
             console.log("Conection error, ERRO: " + err)
         })
+
+
+// Middlewares
+    app.use('/admin', admin)
 
 
 
@@ -68,6 +79,8 @@
             
             
         })
+
+    
         
 
 
