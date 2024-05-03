@@ -12,6 +12,12 @@
     require("./models/Admin")
     const Admin = mongoose.model("admins")
 
+    require("./models/User")
+    const User = mongoose.model("users")
+
+    require("./models/Feedback")
+    const Feedback = mongoose.model("feedbacks")
+
 // Config
     // Template Engine
         app.engine('handlebars', handlebars.engine({
@@ -38,12 +44,29 @@
 // Routes
     // Testing
         app.get('/', (req, res) => {
-            Admin.find().then((posts) => {
+            // Admin.find().then((posts) => {
+            //     res.json(posts)
+            // }).catch((err) => {
+            //     req.flash("error_msg", "There was a problem with initial page loading")
+            //     res.redirect("/404")
+            // })
+
+            // User.find().then((posts) => {
+            //     res.json(posts)
+            // }).catch((err) => {
+            //     req.flash("error_msg", "There was a problem with initial page loading")
+            //     res.redirect("/404")
+            // })
+
+            Feedback.find().then((posts) => {
                 res.json(posts)
             }).catch((err) => {
                 req.flash("error_msg", "There was a problem with initial page loading")
                 res.redirect("/404")
             })
+            
+            
+            
         })
         
 

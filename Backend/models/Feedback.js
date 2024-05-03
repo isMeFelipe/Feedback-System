@@ -7,14 +7,14 @@ const Feedback = new Schema({
         require: true,
     },
     number: {
-        type: Number,
+        type: String,
         require: true,
     },
     text: {
         type: String,
         require: true,
     },
-    Avaliation: {
+    avaliation: {
         type: String,
         require: true,
     },
