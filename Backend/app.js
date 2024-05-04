@@ -5,8 +5,8 @@
     const app = express()
     
     const admin = require('./routes/admin')
-
     const user = require('./routes/user')
+    
     const path = require('path')             // module to work with directorys
     const mongoose = require('mongoose')
     const flash = require("connect-flash")
@@ -48,6 +48,7 @@
 
 // Middlewares
     app.use('/admin', admin)
+    app.use('/user', user)
 
 
 
