@@ -2,12 +2,13 @@
     border: 0;
     box-sizing: border-box;
     background: white;
-    margin: auto;
-    padding-top: 5px;
+    margin: 0;
+    padding: 0;
 }
 
 
 .login_frame{
+  margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,14 +32,14 @@
     flex-direction: column;
 }
 
-button{
+.home_btn{
     background: #2071B2;
     height: 30px;
     width: 150px;
     border-radius: 5px;
     color: white;
 }
-button:hover{
+.home_btn:hover{
     color: #2071B2;
     background-color: white;
     border: solid 2px #2071B2;
@@ -54,6 +55,7 @@ img{
 
 h1{
     color: #2071B2;
+    padding-bottom: 20px;
 }
 
 #scroll-container {

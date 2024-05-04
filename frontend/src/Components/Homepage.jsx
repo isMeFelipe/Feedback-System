@@ -15,7 +15,7 @@ const Homepage = () => {
         </div>
         <div className="admin_logo">
             <img className='admin_img' src="../images/user.png" alt="" />
-            <button>USER</button>
+            <button className='home_btn'>USER</button>
         </div>
       </div>
       </div>
