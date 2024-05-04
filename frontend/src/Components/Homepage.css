@@ -8,7 +8,7 @@
 
 
 .login_frame{
-  margin: auto;
+    margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,8 +22,8 @@
 .frames{
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    column-gap: 150px;
+    justify-content:center;
+    column-gap: 100px;
 }
 
 .admin_logo{
@@ -38,6 +38,7 @@
     width: 150px;
     border-radius: 5px;
     color: white;
+    margin-left: 30px;
 }
 .home_btn:hover{
     color: #2071B2;
@@ -55,7 +56,10 @@ img{
 
 h1{
     color: #2071B2;
-    padding-bottom: 20px;
+    padding-bottom: 80px;
+}
+h3{
+  padding-bottom: 40px;
 }
 
 #scroll-container {

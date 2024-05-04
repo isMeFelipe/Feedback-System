@@ -11,7 +11,7 @@ const Homepage = () => {
       <div className="frames">
       <div className="admin_logo">
             <img className='user_img' src="../images/admin3.png" alt="" />
-            <button>ADMINISTRATOR</button>
+            <button className='home_btn'>ADMIN</button>
         </div>
         <div className="admin_logo">
             <img className='admin_img' src="../images/user.png" alt="" />
