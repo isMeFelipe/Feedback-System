@@ -46,11 +46,10 @@
         })
 
 
+
 // Middlewares
     app.use('/admin', admin)
     app.use('/user', user)
-
-
 
 
 // Routes
@@ -83,6 +82,11 @@
 
     
         
+
+    app.get('/', (req,res) => {
+        res.send("Test")
+    })
+
 
 
 
