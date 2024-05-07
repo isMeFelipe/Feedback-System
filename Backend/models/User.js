@@ -18,7 +18,7 @@ const User = new Schema({
         type: String,
         default: 0,
     },
-
+    
 })
 
 mongoose.model("users", User);

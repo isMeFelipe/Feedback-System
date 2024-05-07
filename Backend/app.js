@@ -13,13 +13,14 @@
     const flash = require("connect-flash")
     const session = require("express-session")
 
+    require("./models/Admin")
+    const Admin = mongoose.model("admins")
+
     require("./models/User")
     const User = mongoose.model("users")
 
     require("./models/Feedback")
     const Feedback = mongoose.model("feedbacks")
-
-
 
 // Config
     // Template Engine
@@ -65,9 +66,9 @@
             next()
         })
 
-    
-    app.use('/admin', admin)
-    app.use('/user', user)
+  // URL pattern    
+      app.use('/admin', admin)
+      app.use('/user', user)
 
 
 // Routes
@@ -76,6 +77,7 @@
             res.render("index")
         })
             
+        
 
 // Local Server Connection
     const  PORT = 8080
