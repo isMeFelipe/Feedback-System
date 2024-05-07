@@ -19,8 +19,7 @@ const Feedback = new Schema({
         require: true,
     },
     email: {
-        type: Schema.Types.ObjectId,
-        ref: "users",
+        type: String,
         require: true,
     },
     date: {

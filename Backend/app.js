@@ -1,3 +1,4 @@
+// npm install express express-handlebars body-parser path mongoose connect-flash express-session
 // Requests
     const express = require('express')
     const handlebars = require('express-handlebars')
@@ -10,6 +11,7 @@
     const path = require('path')             // module to work with directorys
     const mongoose = require('mongoose')
     const flash = require("connect-flash")
+    const session = require("express-session")
 
     require("./models/Admin")
     const Admin = mongoose.model("admins")
@@ -46,50 +48,36 @@
         })
 
 
-
 // Middlewares
-    app.use('/admin', admin)
-    app.use('/user', user)
+    // Session
+        app.use(session({
+            secret: "secretkey",
+            resave: true,
+            saveUninitialized: true,
+        }))
+
+    // Flash
+        app.use(flash())   
+        app.use((req,res,next)=>{
+            res.locals.success_msg = req.flash("success_msg")  // Create global variables
+            res.locals.error_msg   = req.flash("error_msg")
+            res.locals.error = req.flash("error")
+            res.locals.user = req.user || null // Storage authenticated user or null
+            next()
+        })
+
+  // URL pattern    
+      app.use('/admin', admin)
+      app.use('/user', user)
 
 
 // Routes
     // Testing
         app.get('/', (req, res) => {
-            // Admin.find().then((posts) => {
-            //     res.json(posts)
-            // }).catch((err) => {
-            //     req.flash("error_msg", "There was a problem with initial page loading")
-            //     res.redirect("/404")
-            // })
-
-            // User.find().then((posts) => {
-            //     res.json(posts)
-            // }).catch((err) => {
-            //     req.flash("error_msg", "There was a problem with initial page loading")
-            //     res.redirect("/404")
-            // })
-
-            Feedback.find().then((posts) => {
-                res.json(posts)
-            }).catch((err) => {
-                req.flash("error_msg", "There was a problem with initial page loading")
-                res.redirect("/404")
-            })
-            
-            
-            
+            res.render("index")
         })
-
-    
+            
         
-
-    app.get('/', (req,res) => {
-        res.send("Test")
-    })
-
-
-
-
 
 // Local Server Connection
     const  PORT = 8080

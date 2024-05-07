@@ -13,8 +13,12 @@ const User = new Schema({
     hashcode: {
         type: String,
         require: true
-    }
-
+    },
+    isadmin:{
+        type: String,
+        default: 0,
+    },
+    
 })
 
 mongoose.model("users", User);
