@@ -1,0 +1,21 @@
+<h1>Form page</h1>
+
+<form action="/user/feedback/sended" method="post">
+    <div>
+        <div>
+            <label for="name">Name</label>
+                <input type="text" name="name"> <br>
+            <label for="email">Email</label>
+                <input type="text" name="email" value="{{user.email}}" readonly aria-readonly="true"><br>
+            <label for="number">Number</label>
+                <input type="text" name="number" placeholder="+00 000 000"> <br><!-- With validation --> 
+            <label for="avaliation">Avaliation</label>
+                <input type="number" name="avaliation" max="5"> <br><!-- Values 1-5 in emojis or stars -->
+            <label for="text">Text</label>
+                <textarea type="text" name="text"></textarea><br><!-- Values 1-5 in emojis or stars -->
+            <button type="submit">Send Feedback</button>
+        </div>
+
+    </div>
+
+</form>
