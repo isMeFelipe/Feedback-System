@@ -20,11 +20,11 @@ const Feedback = mongoose.model("feedbacks")
         })
 
         router.post("/register", (req,res) => {
-            User.findOne({hashcode: req.body.password}).lean().then((user)=>{
+            User.findOne({email: req.body.email}).lean().then((user)=>{
                 if(user){
                     req.flash("error_msg", "Already registered user")
                     res.redirect("/user/register")
-                }
+                }else{
                 bcrypt.genSalt(saltRounds, function(err, salt) {
                     bcrypt.hash((req.body.email + req.body.password), salt, function(err, hash) {
                         const newUser = {
@@ -41,7 +41,7 @@ const Feedback = mongoose.model("feedbacks")
                         })
                     });
                 });                
-
+                }
             })
         })
 
@@ -64,7 +64,7 @@ const Feedback = mongoose.model("feedbacks")
                                 res.redirect("/user/feedbackpage/"+encodedHashcode)
                             }else{
                                 req.flash("error_msg", "Invalid password or e-mail")
-                                req.redirect("/user/login")
+                                res.redirect("/user/login")
                             }
                         });
                         }   
