@@ -92,34 +92,49 @@ const Feedback = mongoose.model("feedbacks")
     })
 
     router.post('/feedback/sended', (req,res) => {
-            // Validation 
-            const name = req.body.name
-            const number = req.body.number
-            const email = req.body.email
-            const text = req.body.text
-            const avaliation = req.body.avaliation
+            Feedback.findOne({email: req.body.email}).lean().then((exist) => {
+                if(exist){
+                    req.flash("error_msg", "Feedback already sent by this email")
+                    res.redirect("/")
+                }else{
+                // Validation 
+                    const name = req.body.name
+                    const number = req.body.number
+                    const email = req.body.email
+                    const text = req.body.text
+                    const avaliation = req.body.avaliation
+                
+                    const newfeedback = {
+                        name: name,
+                        number: number,
+                        email: email,
+                        text: text,
+                        avaliation: avaliation,
+                    }
+                    
+                    new Feedback(newfeedback).save().then(() =>{
+                        req.flash("success_msg","Thanks for your feedback")
+                        res.redirect("/")
+                    }).catch((err) => {
+                        req.flash("error_msg", "Failure in feedback save")
+                        console.log(err)
+                        res.redirect("/")
+                    })
+                }
 
-            
-
-            
-
-            // If validation it's ok
-            const newfeedback = {
-                name: name,
-                number: number,
-                email: email,
-                text: text,
-                avaliation: avaliation,
-            }
-            
-            new Feedback(newfeedback).save().then(() =>{
-                req.flash("success_msg","Thanks for your feedback")
-                res.redirect("/")
             }).catch((err) => {
-                req.flash("error_msg", "Failure in feedback save")
-                console.log(err)
+                req.flash("error_msg", "Internal error in feedback send")
                 res.redirect("/")
             })
+
+
+
+
+
+
+            
+
+ 
     })
 
 
