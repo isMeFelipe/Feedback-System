@@ -1,7 +1,8 @@
 const express = require('express')
 const router  = express.Router() // For export routes
 const mongoose = require('mongoose')
-
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 require("../models/User")
 const User    = mongoose.model("users")
@@ -24,20 +25,22 @@ const Feedback = mongoose.model("feedbacks")
                     req.flash("error_msg", "Already registered user")
                     res.redirect("/user/register")
                 }
-
-                const newUser = {
-                    name: req.body.name,
-                    email: req.body.email,
-                    hashcode: req.body.password,
-                }
-                
-                new User(newUser).save().then(() => {
-                    req.flash("success_msg", "Successful user register")
-                    res.redirect("/")
-                }).catch((err) => {
-                    req.flash("error_msg", "Failure in user register")
-                    res.redirect("/")
-                })
+                bcrypt.genSalt(saltRounds, function(err, salt) {
+                    bcrypt.hash((req.body.email + req.body.password), salt, function(err, hash) {
+                        const newUser = {
+                            name: req.body.name,
+                            email: req.body.email,
+                            hashcode: hash,
+                        }
+                        new User(newUser).save().then(() => {
+                            req.flash("success_msg", "Successful user register")
+                            res.redirect("/")
+                        }).catch((err) => {
+                            req.flash("error_msg", "Failure in user register")
+                            res.redirect("/")
+                        })
+                    });
+                });                
 
             })
         })
@@ -48,27 +51,34 @@ const Feedback = mongoose.model("feedbacks")
         });
 
         router.post('/login/auth', (req,res) => {
-            User.findOne({email: req.body.email}).lean().then((user) => {
-                if(!user){
-                    req.flash("error_msg", "Unregistered user")
-                    res.redirect("/user/login")
-                }else{
-                // Validation
-                    if(req.body.password == user.hashcode){
-                        req.flash("successful login")
-                        res.redirect("/user/feedbackpage/"+user.hashcode)
-                    }else{
-                        req.flash("error_msg", "Invalid password or e-mail")
-                        req.redirect("/user/login")
-                    }
-                }
-            }).catch((err) => {
-                req.flash("error_msg", "Internal error in user authentication")
-                res.redirect("/")
-            })
-            
-        })
+                    User.findOne({email: req.body.email}).lean().then((user) => {
+                        if(!user){
+                            req.flash("error_msg", "Unregistered user")
+                            res.redirect("/user/login")
+                        }else{
+                        // Load hash from your password DB.
+                        bcrypt.compare((req.body.email + req.body.password), user.hashcode).then((result) => {
+                            if(result){
+                                req.flash("successful login")
+                                const encodedHashcode = encodeURIComponent(user.hashcode);
+                                res.redirect("/user/feedbackpage/"+encodedHashcode)
+                            }else{
+                                req.flash("error_msg", "Invalid password or e-mail")
+                                req.redirect("/user/login")
+                            }
+                        });
+                        }   
+                    }).catch((err) => {
+                        req.flash("error_msg", "Internal error in user authentication")
+                        res.redirect("/")
+                    })
+                    
 
+
+
+                });
+     
+     
 
     router.get('/feedbackpage/:hashcode', (req,res) => {
         User.findOne({hashcode: req.params.hashcode}).then((user) => {
@@ -88,6 +98,8 @@ const Feedback = mongoose.model("feedbacks")
             const email = req.body.email
             const text = req.body.text
             const avaliation = req.body.avaliation
+
+            
 
             
 
