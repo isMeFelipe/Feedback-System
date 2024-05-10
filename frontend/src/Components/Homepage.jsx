@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import "./Homepage.css"
 
 const Homepage = () => {
@@ -11,11 +12,11 @@ const Homepage = () => {
       <div className="frames">
       <div className="admin_logo">
             <img className='user_img' src="../images/admin3.png" alt="" />
-            <button className='home_btn'>ADMIN</button>
+            <Link to="/adminpage" ><button className='home_btn'>ADMIN</button></Link>
         </div>
         <div className="admin_logo">
             <img className='admin_img' src="../images/user.png" alt="" />
-            <button className='home_btn'>USER</button>
+            <Link to="/userpage" ><button className='home_btn'>USER</button></Link>
         </div>
       </div>
       </div>

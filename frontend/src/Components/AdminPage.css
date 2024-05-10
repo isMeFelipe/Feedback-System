@@ -1,60 +1,70 @@
-*{
-    border: 0;
-    margin: 0;
-    padding: 0;
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
 
-.frame_top{
-    height: 50px;
-    width: 100%;
-    background: #2071B2;
+.frame_top {
+  height: 50px;
+  width: 100%;
+  background: #2071b2;
 }
 
-
-.admin_frame_body{
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 500px;
-    width: 700px;
-    margin: auto;
-    background-color: #f4f6f8;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.admin_frame_body {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  width: 700px;
+  margin: auto;
+  background-color: #f4f6f8;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.admin_frame_border{
-    padding-top: 70px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
-    height: 400px;
-    width: 600px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.admin_frame_border {
+  padding-top: 70px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  gap: 8px;
+  height: 400px;
+  width: 600px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.admin{
-    height: 60px;
-    width: 200px;
-    border: 2px solid black;
-    border-radius: 5px;
-    text-align: center;
+.admin {
+  height: 60px;
+  width: 200px;
+  border: 2px solid black;
+  border-radius: 5px;
+  text-align: center;
 }
 
-.login_btn{
-    background: #2071B2;
-    color: white;
-    height: 30px;
-    width: 60px;
-    border-radius: 5px;
-    margin-top: 20px;
-
-
+.login_btn {
+  background: #2071b2;
+  color: white;
+  height: 30px;
+  width: 60px;
+  border-radius: 5px;
+  margin-top: 20px;
 }
 
-.login_btn:hover{
-    background-color: white;
-    color: #2071B2;
-    border: 2px solid #2071B2;
+.login_btn:hover {
+  background-color: white;
+  color: #2071b2;
+  border: 2px solid #2071b2;
+}
+
+.error {
+  border-color: red;
+}
+
+.error:focus {
+  outline: red;
+}
+
+.error_indicator {
+  color: red;
 }
