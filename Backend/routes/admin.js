@@ -16,7 +16,6 @@ const Feedback = mongoose.model("feedbacks")
 
 // Routes
 
-
 router.get('/login', (req, res) => {
     res.render('admin/loginform')
 });
@@ -47,7 +46,7 @@ router.post('/login/auth', (req,res) => {
 
 router.get('/initialpage/:hashcode', (req,res) => {
     Feedback.find().then((feedbacks) => {
-        res.render('admin/initialpage', {hashcode: req.params.hashcode, feedbacks: feedbacks})
+        res.render('admin/initialpage', {hashcode: encodeURIComponent(req.params.hashcode), feedbacks: feedbacks})
     }).catch((err) => {
         req.flash("error_msg", "Internal error in feedbacks rescue")
         res.render('admin/initialpage', {hashcode: req.params.hashcode, feedbacks: {}})
@@ -55,7 +54,7 @@ router.get('/initialpage/:hashcode', (req,res) => {
     
 })
 
-router.get('/analysis/', (req, res) => {
+router.get('/analysis/:hashcode', (req, res) => {
     Feedback.aggregate([
       { $group: { _id: '$avaliation', count: { $sum: 1 } } },
       { $sort: { _id: 1 } }
@@ -83,6 +82,7 @@ router.get('/analysis/', (req, res) => {
       
   
       res.render("admin/analysis", {
+        hashcode: encodeURIComponent(req.params.hashcode),
         aval1: counts[1],
         aval2: counts[2],
         aval3: counts[3],
@@ -96,9 +96,9 @@ router.get('/analysis/', (req, res) => {
         percentage1,
       });
     })
-    .catch(error => {
-      console.error('Erro ao contar as avaliações:', error);
-      res.status(500).send('Erro ao contar as avaliações');
+    .catch( (err) => {
+      req.flash("error_msg",'Internal error in feedback count');
+      res.redirect("/admin/initialpage");
     });
   });
 
