@@ -30,7 +30,6 @@
         }))
         app.set('view engine', 'handlebars')
 
-
     // Body Parser
         app.use(express.urlencoded())
         app.use(express.json())

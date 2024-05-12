@@ -1,10 +1,49 @@
-<h1>Admin Page</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Admin</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto"> <!-- Adiciona margem à direita -->
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(Página atual)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/analysis/">Analysis</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto"> <!-- Adiciona margem à esquerda -->
+      <li class="nav-item">
+        <a class="nav-link" href="#">Config</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-<div>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, debitis quasi consectetur libero nam vero sequi laborum labore aspernatur dicta voluptate vel, nemo impedit dolore dolores nesciunt consequatur fuga totam.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, debitis quasi consectetur libero nam vero sequi laborum labore aspernatur dicta voluptate vel, nemo impedit dolore dolores nesciunt consequatur fuga totam.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, debitis quasi consectetur libero nam vero sequi laborum labore aspernatur dicta voluptate vel, nemo impedit dolore dolores nesciunt consequatur fuga totam.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, debitis quasi consectetur libero nam vero sequi laborum labore aspernatur dicta voluptate vel, nemo impedit dolore dolores nesciunt consequatur fuga totam.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, debitis quasi consectetur libero nam vero sequi laborum labore aspernatur dicta voluptate vel, nemo impedit dolore dolores nesciunt consequatur fuga totam.</p>
-    
+
+<h1>Feedbacks</h1>
+
+
+<div class="row">
+{{#each feedbacks}}
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                Avaliation: {{avaliation}}
+                <br>
+                From: {{name}} 
+                <br>
+                Contact: {{email}}
+                <br>
+                Text: {{text}} 
+                <br>
+                Date: {{date}}
+            </div>
+         </div>
+    </div>
+{{else}}
+
+{{/each}}
+
+  
 </div>
