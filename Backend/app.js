@@ -1,4 +1,4 @@
-// npm install express express-handlebars body-parser path mongoose connect-flash express-session
+// npm install express express-handlebars body-parser path mongoose connect-flash express-session bcrypt
 // Requests
     const express = require('express')
     const handlebars = require('express-handlebars')
@@ -12,9 +12,6 @@
     const mongoose = require('mongoose')
     const flash = require("connect-flash")
     const session = require("express-session")
-
-    require("./models/Admin")
-    const Admin = mongoose.model("admins")
 
     require("./models/User")
     const User = mongoose.model("users")
@@ -47,6 +44,8 @@
             console.log("Conection error, ERRO: " + err)
         })
 
+    // Public
+        app.use(express.static(path.join(__dirname, "public")))
 
 // Middlewares
     // Session
@@ -84,3 +83,9 @@
     app.listen(PORT, () => {
         console.log("Conection in port: " + PORT)
     })
+
+
+// Conexão com MongoDB Atals
+// Página de configurações para mudar informações da empresa ou mudar o tempo de restart de feedback
+// Aplicar bootstrap
+// Fazer front-end

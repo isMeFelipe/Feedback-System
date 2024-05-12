@@ -15,7 +15,7 @@ const User = new Schema({
         require: true
     },
     isadmin:{
-        type: String,
+        type: Number,
         default: 0,
     },
     
