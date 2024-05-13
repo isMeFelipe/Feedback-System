@@ -11,13 +11,20 @@ const User = mongoose.model("users")
 require("../models/Feedback")
 const Feedback = mongoose.model("feedbacks")
 
-
+require("../models/Client")
+const Client = mongoose.model("clients")
 
 
 // Routes
 
 router.get('/login', (req, res) => {
-    res.render('admin/loginform')
+    Client.findOne({_id: "664203f8bcb199f186f6a9c8"}).then((client) => {
+      res.render('admin/loginform', {client: client})
+    }).catch((err) => {
+      req.flash("error_msg", "Internal error retrieving company information")
+      res.redirect("/")
+    })
+    
 });
 
 router.post('/login/auth', (req,res) => {
@@ -49,7 +56,7 @@ router.get('/initialpage/:hashcode', (req,res) => {
         res.render('admin/initialpage', {hashcode: encodeURIComponent(req.params.hashcode), feedbacks: feedbacks})
     }).catch((err) => {
         req.flash("error_msg", "Internal error in feedbacks rescue")
-        res.render('admin/initialpage', {hashcode: req.params.hashcode, feedbacks: {}})
+        res.render('admin/initialpage', {hashcode: encodeURIComponent(req.params.hashcode), feedbacks: {}})
     })
     
 })
@@ -100,7 +107,7 @@ router.get('/analysis/:hashcode', (req, res) => {
     })
     .catch( (err) => {
       req.flash("error_msg",'Internal error in feedback count');
-      res.redirect("/admin/initialpage");
+      res.redirect("/admin/initialpage/" + encodeURI(req.params.hashcode));
     });
 
 });
@@ -109,9 +116,46 @@ router.get('/analysis/:hashcode', (req, res) => {
 
 
 router.get('/settings/:hashcode', (req,res) => {
-  res.send("test")
+  Client.findOne({_id: "664203f8bcb199f186f6a9c8"}).then((client) => {
+    res.render('admin/settingspage', {hashcode: encodeURIComponent(req.params.hashcode),client: client})
+  }).catch((err) => {
+    req.flash("error_msg", "Internal error retrieving company information")
+    res.redirect("/")
+  })
 })
 
+router.get('/settings/update/:hashcode', (req, res) => {
+  Client.findOne({_id: "664203f8bcb199f186f6a9c8"}).then((client) => {
+    res.render('admin/settingsupdatepage', {hashcode: encodeURIComponent(req.params.hashcode),client: client})
+  }).catch((err) => {
+    req.flash("error_msg", "Internal error retrieving company information")
+    res.redirect("/")
+  })
+})
+
+router.post('/settings/update/:hashcode/:companyid', (req,res) =>{
+    Client.findOne({_id: req.params.companyid}).then((client) => {
+      client.name = req.body.name;
+      client.email = req.body.email;
+      client.number = req.body.number;
+      client.address = req.body.address;
+      client.logo = req.body.logo;
+      client.resend = req.body.resend;
+      client.response_range = req.body.response_range
+
+      client.save().then(() => {
+        req.flash("success_msg", "Successfuly settings update")
+        res.redirect("/admin/settings/" + encodeURIComponent(req.params.hashcode))
+      }).catch((err) => {
+        req.flash("error_msg", "Internal error in settings update")
+        res.redirect("/admin/initialpage/")
+      })
+
+  }).catch((err) => {
+    req.flash("error_msg", "Internal error retrieving company information")
+    res.redirect("/")
+  })
+})
 
 
 module.exports = router
