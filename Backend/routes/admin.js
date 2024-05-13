@@ -54,6 +54,8 @@ router.get('/initialpage/:hashcode', (req,res) => {
     
 })
 
+
+
 router.get('/analysis/:hashcode', (req, res) => {
     Feedback.aggregate([
       { $group: { _id: '$avaliation', count: { $sum: 1 } } },
@@ -100,7 +102,15 @@ router.get('/analysis/:hashcode', (req, res) => {
       req.flash("error_msg",'Internal error in feedback count');
       res.redirect("/admin/initialpage");
     });
-  });
+
+});
+
+
+
+
+router.get('/settings/:hashcode', (req,res) => {
+  res.send("test")
+})
 
 
 
