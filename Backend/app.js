@@ -11,6 +11,7 @@
     const mongoose = require('mongoose')
     const flash = require("connect-flash")
     const session = require("express-session")
+    
 
 
     require("./models/User")
@@ -21,6 +22,8 @@
 
     require("./models/Client")
     const Client = mongoose.model("clients")
+
+    require('dotenv').config();
 
 // Config
     // Template Engine
@@ -39,7 +42,8 @@
         
 
     // Mongoose
-    const uri = "mongodb+srv://dbUser:SxmmM7*PWJut62q@feedback-product.3kzkwdo.mongodb.net/"
+    const uri = process.env.MONGO_URI; // to connection with hosted database // must be added in .env like MONGO_URI=mongodb+srv://<username>:<password>@<database>.3kzkwdo.mongodb.net/
+    // const uri = "mongodb://localhost:PORT/databaseName"; // to connection with localhost db
         mongoose.Promise = global.Promise;
         mongoose.connect(uri).then(() => {
             console.log("Conection sucess")
