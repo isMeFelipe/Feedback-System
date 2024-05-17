@@ -1,4 +1,3 @@
-// npm install express express-handlebars body-parser path mongoose connect-flash express-session bcrypt
 // Requests
     const express = require('express')
     const handlebars = require('express-handlebars')
@@ -8,10 +7,11 @@
     const admin = require('./routes/admin')
     const user = require('./routes/user')
     
-    const path = require('path')             // module to work with directorys
+    const path = require('path')             
     const mongoose = require('mongoose')
     const flash = require("connect-flash")
     const session = require("express-session")
+
 
     require("./models/User")
     const User = mongoose.model("users")
@@ -19,13 +19,16 @@
     require("./models/Feedback")
     const Feedback = mongoose.model("feedbacks")
 
+    require("./models/Client")
+    const Client = mongoose.model("clients")
+
 // Config
     // Template Engine
         app.engine('handlebars', handlebars.engine({
             defaultLayout: 'main',
             runtimeOptions: {
-                allowProtoPropertiesByDefault: true, // Para conseguir acessos 
-                allowProtoMethodsByDefault: true,    // Para conseguir acessos
+                allowProtoPropertiesByDefault: true,
+                allowProtoMethodsByDefault: true,  
             },
         }))
         app.set('view engine', 'handlebars')
@@ -36,8 +39,9 @@
         
 
     // Mongoose
+    const uri = "mongodb+srv://dbUser:SxmmM7*PWJut62q@feedback-product.3kzkwdo.mongodb.net/"
         mongoose.Promise = global.Promise;
-        mongoose.connect("mongodb://localhost/feedbacksystem").then(() => {
+        mongoose.connect(uri).then(() => {
             console.log("Conection sucess")
         }).catch((err) => {
             console.log("Conection error, ERRO: " + err)
@@ -57,10 +61,10 @@
     // Flash
         app.use(flash())   
         app.use((req,res,next)=>{
-            res.locals.success_msg = req.flash("success_msg")  // Create global variables
+            res.locals.success_msg = req.flash("success_msg")  
             res.locals.error_msg   = req.flash("error_msg")
             res.locals.error = req.flash("error")
-            res.locals.user = req.user || null // Storage authenticated user or null
+            res.locals.user = req.user || null 
             next()
         })
 
@@ -70,11 +74,37 @@
 
 
 // Routes
-    // Testing
-        app.get('/', (req, res) => {
-            res.render("index")
+    app.get('/', (req, res) => {
+        Client.findOne().then((client) => {
+            res.render("index", {client: client})
+
+        }).catch((err) => {
+            req.flash("error_msg", "Internal Error in company information rescue")
+            res.send(404)
         })
+    })
             
+
+    app.get('/contact', (req,res) => {
+        Client.findOne().then((client) => {
+            res.render("user/contact", {client: client})
+
+        }).catch((err) => {
+            req.flash("error_msg", "Internal Error in company information rescue")
+            res.send(404)
+        })
+    })
+
+    app.get('/about', (req,res) => {
+        Client.findOne().then((client) => {
+            res.render("user/about", {client: client})
+
+        }).catch((err) => {
+            req.flash("error_msg", "Internal Error in company information rescue")
+            res.send(404)
+        })
+    })
+    
         
 
 // Local Server Connection
@@ -82,9 +112,3 @@
     app.listen(PORT, () => {
         console.log("Conection in port: " + PORT)
     })
-
-
-// Conexão com MongoDB Atals
-// Página de configurações para mudar informações da empresa ou mudar o tempo de restart de feedback
-// Aplicar bootstrap
-// Fazer front-end

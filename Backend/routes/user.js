@@ -10,13 +10,22 @@ const User    = mongoose.model("users")
 require("../models/Feedback")
 const Feedback = mongoose.model("feedbacks")
 
-
+require("../models/Client")
+const Client = mongoose.model("clients")
 
 
 // Routes
     // User register 
         router.get("/register",(req,res) => {
-            res.render("user/registerform")
+            Client.findOne().then((client) => {
+                res.render("user/registerform", {client: client})
+        
+    
+            }).catch((err) => {
+                req.flash("error_msg", "Internal Error in company information rescue")
+                res.send(404)
+            })
+           
         })
 
         router.post("/register", (req,res) => {
@@ -47,21 +56,60 @@ const Feedback = mongoose.model("feedbacks")
 
     // User login
         router.get('/login', (req, res) => {
-            res.render('user/loginform')
+        Client.findOne().then((client) => {
+            res.render("user/loginform", {client: client})
+
+        }).catch((err) => {
+            req.flash("error_msg", "Internal Error in company information rescue")
+            res.redirect("/")
+        })
         });
 
         router.post('/login/auth', (req,res) => {
+            Client.findOne().then((client) => {
                     User.findOne({email: req.body.email}).lean().then((user) => {
+                       
                         if(!user){
+              
                             req.flash("error_msg", "Unregistered user")
                             res.redirect("/user/login")
                         }else{
-                        // Load hash from your password DB.
+
                         bcrypt.compare((req.body.email + req.body.password), user.hashcode).then((result) => {
                             if(result){
-                                req.flash("successful login")
-                                const encodedHashcode = encodeURIComponent(user.hashcode);
-                                res.redirect("/user/feedbackpage/"+encodedHashcode)
+                                Feedback.findOne({email: req.body.email}).lean().then((feedback) => {
+                                    if(feedback){
+                                        if (client.resend) {
+                                            const diff = Math.abs(feedback.date.getTime() - Date.now());
+                                            const diffInDays = Math.ceil(diff / (1000 * 60 * 60 * 24));
+                                            const remainingDays = Math.ceil((client.response_range * 1000 * 60 * 60 * 24 - diff) / (1000 * 60 * 60 * 24));
+                                
+                                            if (diffInDays < client.response_range * 1000 * 60 * 60 * 24) {
+                                                req.flash("error_msg", `You will only be able to resend a feedback in ${remainingDays} day(s)`);
+                                                res.redirect("/");
+
+                                            } else {
+                                                req.flash("success_msg", "Successful login");
+                                                const encodedHashcode = encodeURIComponent(user.hashcode);
+                                                res.redirect("/user/feedbackpage/" + encodedHashcode);
+                                            }
+                                        } else {
+                                            req.flash("error_msg", "Feedback already sent by this email");
+                                            res.redirect("/");
+                                        }
+                                    } 
+                                    else {
+                                        req.flash("success_msg", "Successful login");
+                                        const encodedHashcode = encodeURIComponent(user.hashcode);
+                                        res.redirect("/user/feedbackpage/" + encodedHashcode);
+                                    }
+                                    
+                                }).catch((err) => {
+                                    req.flash("error_msg", "Internal Error in company information rescue " + err)
+                                    res.redirect("/")
+                                    })
+                                
+
                             }else{
                                 req.flash("error_msg", "Invalid password or e-mail")
                                 res.redirect("/user/login")
@@ -72,31 +120,33 @@ const Feedback = mongoose.model("feedbacks")
                         req.flash("error_msg", "Internal error in user authentication")
                         res.redirect("/")
                     })
-                    
-
-
-
-                });
+            }).catch((err) => {
+                    req.flash("error_msg", "Internal Error in company information rescue")
+                    res.send(404)
+                    })
+        });
      
      
 
     router.get('/feedbackpage/:hashcode', (req,res) => {
-        User.findOne({hashcode: req.params.hashcode}).then((user) => {
-            res.render('user/formpage', {user: user})
+        Client.findOne().then((client) => {
+            User.findOne({hashcode: req.params.hashcode}).then((user) => {
+                res.render('user/formpage', {user: user, client: client})
+    
+            }).catch((err) =>{ 
+                req.flash("error_msg", "Unregistered user")
+                res.redirect("/")
+            })
+    
 
-        }).catch((err) =>{ 
-            req.flash("error_msg", "Unregistered user")
-            res.redirect("/")
+        }).catch((err) => {
+            req.flash("error_msg", "Internal Error in company information rescue")
+            res.send(404)
         })
-
+        
     })
 
     router.post('/feedback/sended', (req,res) => {
-            Feedback.findOne({email: req.body.email}).lean().then((exist) => {
-                if(exist){
-                    req.flash("error_msg", "Feedback already sent by this email")
-                    res.redirect("/")
-                }else{
                 // Validation 
                     const name = req.body.name
                     const number = req.body.number
@@ -120,28 +170,7 @@ const Feedback = mongoose.model("feedbacks")
                         console.log(err)
                         res.redirect("/")
                     })
-                }
-
-            }).catch((err) => {
-                req.flash("error_msg", "Internal error in feedback send")
-                res.redirect("/")
-            })
-
-
-
-
-
-
-            
-
- 
-    })
-
-    // Just for tests
-    router.get('/page/aaabbb', (req,res) => {
-        // aaabbb ==>  testing hascode
-        res.render('admin/page')
-    })
+                })
 
 
 module.exports = router

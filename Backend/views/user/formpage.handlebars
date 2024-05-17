@@ -1,21 +1,34 @@
-<h1>Form page</h1>
-
-<form action="/user/feedback/sended" method="post">
-    <div>
-        <div>
-            <label for="name">Name</label>
-                <input type="text" name="name" required> <br>
-            <label for="email">Email</label>
-                <input type="text" name="email" value="{{user.email}}" readonly aria-readonly="true" required><br>
-            <label for="number">Number</label>
-                <input type="text" name="number" placeholder="+00 000 000" required> <br><!-- With validation --> 
-            <label for="avaliation">Avaliation</label>
-                <input type="number" name="avaliation" max="5" required> <br><!-- Values 1-5 in emojis or stars -->
-            <label for="text">Text</label>
-                <textarea type="text" name="text"></textarea required><br><!-- Values 1-5 in emojis or stars -->
-            <button type="submit">Send Feedback</button>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="text-center">Send a feedback</h1>
         </div>
-
+        <div class="card-body">
+            <form action="/user/feedback/sended" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" class="form-control" value="{{user.name}}" autofocus required> <br>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" value="{{user.email}}" readonly aria-readonly="true" class="form-control" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="number">Phone</label>
+                    <input type="text" name="number" placeholder="+00 000 000" class="form-control" required> <br><!-- With validation --> 
+                </div>
+                <div class="form-group">
+                    <label for="avaliation">Avaliation</label>
+                    <input type="number" name="avaliation" min="1" max="5" class="form-control" required placeholder="1-5"> <br><!-- Values 1-5 in emojis or stars -->
+                </div>
+                <div class="form-group">
+                    <label for="text">Text</label>
+                    <textarea type="text" name="text" class="form-control"></textarea required><br>
+                </div>
+                <button type="submit" class="btn btn-block btn-success">Send</button>
+                <a href="/" class="btn btn-block btn-danger">Cancel</a>
+                
+            </form>
+        </div>
     </div>
-
-</form>
+</div>

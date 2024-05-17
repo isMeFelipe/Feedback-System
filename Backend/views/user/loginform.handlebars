@@ -1,14 +1,22 @@
-<div class="center-screen">
-    <h1>Login Form</h1>
-    <div>
-        <form action="/user/login/auth" method="post">
-            <label for="email">E-mail</label>
-                <input type="email" name="email"> <br>
-            <label for="password">password</label>
-                <input type="text" name="password"> <br>
-            <div>
-                <button type="submit">Confirm</button> <br>
-            </div>
-        </form>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="text-center">Login Form</h1>
+        </div>
+        <div class="card-body">
+            <form action="/user/login/auth" method="post">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" autofocus class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-block btn-success">Confirm</button>
+                <a href="/" class="btn btn-block btn-danger">Cancel</a>
+            </form>
+        </div>
     </div>
 </div>
+

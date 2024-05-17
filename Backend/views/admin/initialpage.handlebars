@@ -1,40 +1,26 @@
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-<ul class="nav nav-pills">
-  <li class="nav-item">
-    <a class="nav-link active" style="width=72" href="/admin/initialpage/{{hashcode}}">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/admin/analysis/{{hashcode}}">Analysis</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/admin/settings/{{hashcode}}">Settings</a>
-  </li>
-</ul>
-</nav>
-<h1>Feedbacks</h1>
-
-
-<div class="row">
-{{#each feedbacks}}
-    <div class="col-md-4">
-        <div class="card text-white bg-primary mb-3">
-            <div class="card-body">
-                Avaliation: {{avaliation}}
-                <br>
-                From: {{name}} 
-                <br>
-                Contact: {{email}}
-                <br>
-                Text: {{text}} 
-                <br>
-                Date: {{date}}
+<div class="row ml-3 mr-3" style="z-index: 2; position: relative">
+    {{#each feedbacks}}
+        <div class="col-md-4 mb-4">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <p class="card-text"><strong>Avaliation:</strong> {{avaliation}}</p>
+                    <p class="card-text"><strong>From:</strong> {{name}}</p>
+                    <p class="card-text"><strong>Contact:</strong> {{email}}</p>
+                    <hr> <!-- Adicionei uma linha horizontal para separar o texto -->
+                    <p class="card-text"><strong>Feedback:</strong></p>
+                    <p class="card-text">{{text}}</p>
+                    <hr> <!-- Adicionei outra linha horizontal para separar o texto -->
+                    <p class="card-text"><strong>Date:</strong> {{date}}</p>
+                </div>
             </div>
-         </div>
-    </div>
-{{else}}
-
-{{/each}}
-
-  
+        </div>
+    {{else}}
+        <div class="col-md-12">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <p>No feedbacks available.</p>
+                </div>
+            </div>
+        </div>
+    {{/each}}
 </div>

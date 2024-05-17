@@ -1,95 +1,83 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-<ul class="nav nav-pills">
-  <li class="nav-item">
-    <a class="nav-link" style="width=72" href="/admin/initialpage/{{hashcode}}">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" href="/admin/analysis/{{hashcode}}">Analysis</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/admin/settings/{{hashcode}}">Settings</a>
-  </li>
-</ul>
-</nav>
-<h1>Feedbacks</h1>
+<div class="row ml-3 mr-3" style="z-index: 2; position: relative">
+  <div class="col-md-12">
+    <h1 class="ml-2" style="color: #FFFF; text-align: center">Avaliations</h1>
+    <hr>
+    <div class="d-flex justify-content-between flex-wrap">
+      <div class="card bg-light mb-3 ml-2 mr-2" style="width: 18rem;">
+        <div class="card-header bg-primary text-white">Very Bad</div>
+        <div class="card-body">
+          <h5 class="card-title">{{aval1}}</h5>
+        </div>
+      </div>
 
+      <div class="card bg-light mb-3 ml-2 mr-2" style="width: 18rem;">
+        <div class="card-header bg-primary text-white">Bad</div>
+        <div class="card-body">
+          <h5 class="card-title">{{aval2}}</h5>
+        </div>
+      </div>
 
+      <div class="card bg-light mb-3 ml-2 mr-2" style="width: 18rem;">
+        <div class="card-header bg-primary text-white">Neutral</div>
+        <div class="card-body">
+          <h5 class="card-title">{{aval3}}</h5>
+        </div>
+      </div>
 
+      <div class="card bg-light mb-3 ml-2 mr-2" style="width: 18rem;">
+        <div class="card-header bg-primary text-white">Good</div>
+        <div class="card-body">
+          <h5 class="card-title">{{aval4}}</h5>
+        </div>
+      </div>
 
-<h2>Avaliations</h2>
-<hr>
-<div class="d-flex justify-content-between flex-fill">
-  <div class="card text-white flex-fill bg-primary mb-3 ml-5" style="max-width: 18rem;  width: 8rem">
-    <div class="card-header">Very Bad</div>
-    <div class="card-body">
-      <h5 class="card-title">{{aval1}}</h5>
+      <div class="card bg-light mb-3 ml-2 mr-2" style="width: 18rem;">
+        <div class="card-header bg-primary text-white">Very Good</div>
+        <div class="card-body">
+          <h5 class="card-title">{{aval5}}</h5>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="card text-white flex-fill bg-primary mb-3" style="max-width: 18rem; width: 8rem">
-    <div class="card-header">Bad</div>
-    <div class="card-body">
-      <h5 class="card-title">{{aval2}}</h5>
-    </div>
-  </div>
+  <div class="col-md-12">
+    <h1 class="ml-2" style="color: #FFFF; text-align: center">Percentages</h1>
+    <hr>
+    <div class="d-flex justify-content-between flex-wrap">
+      <div class="card bg-light mb-3 ml-2 mr-2" style="width: 18rem;">
+        <div class="card-header bg-primary text-white">Very Bad</div>
+        <div class="card-body">
+          <h5 class="card-title">{{percentage1}}%</h5>
+        </div>
+      </div>
 
-  <div class="card text-white flex-fill bg-primary mb-3" style="max-width: 18rem;  width: 8rem">
-    <div class="card-header">Neutral</div>
-    <div class="card-body">
-      <h5 class="card-title">{{aval3}}</h5>
-    </div>
-  </div>
+      <div class="card bg-light mb-3 ml-2 mr-2" style="width: 18rem;">
+        <div class="card-header bg-primary text-white">Bad</div>
+        <div class="card-body">
+          <h5 class="card-title">{{percentage2}}%</h5>
+        </div>
+      </div>
 
-  <div class="card text-white flex-fill bg-primary mb-3" style="max-width: 18rem; width: 8rem">
-    <div class="card-header">Good</div>
-    <div class="card-body">
-      <h5 class="card-title">{{aval4}}</h5>
-    </div>
-  </div>
+      <div class="card bg-light mb-3 ml-2 mr-2" style="width: 18rem;">
+        <div class="card-header bg-primary text-white">Neutral</div>
+        <div class="card-body">
+          <h5 class="card-title">{{percentage3}}%</h5>
+        </div>
+      </div>
 
-  <div class="card text-white flex-fill bg-primary mb-3 mr-5" style="max-width: 18rem; width: 8rem">
-    <div class="card-header">Very Good</div>
-    <div class="card-body">
-      <h5 class="card-title">{{aval5}}</h5>
-    </div>
-  </div>
-</div>
+      <div class="card bg-light mb-3 ml-2 mr-2" style="width: 18rem;">
+        <div class="card-header bg-primary text-white">Good</div>
+        <div class="card-body">
+          <h5 class="card-title">{{percentage4}}%</h5>
+        </div>
+      </div>
 
-<h2>Percentages</h2>
-<hr>
-<div class="d-flex justify-content-between flex-fill">
-  <div class="card text-white flex-fill bg-primary mb-3 ml-5" style="max-width: 18rem;  width: 8rem">
-    <div class="card-header">Very Bad</div>
-    <div class="card-body">
-      <h5 class="card-title">{{percentage1}}%</h5>
-    </div>
-  </div>
-
-  <div class="card text-white flex-fill bg-primary mb-3" style="max-width: 18rem; width: 8rem">
-    <div class="card-header">Bad</div>
-    <div class="card-body">
-      <h5 class="card-title">{{percentage2}}%</h5>
-    </div>
-  </div>
-
-  <div class="card text-white flex-fill bg-primary mb-3" style="max-width: 18rem;  width: 8rem">
-    <div class="card-header">Neutral</div>
-    <div class="card-body">
-      <h5 class="card-title">{{percentage3}}%</h5>
-    </div>
-  </div>
-
-  <div class="card text-white flex-fill bg-primary mb-3" style="max-width: 18rem; width: 8rem">
-    <div class="card-header">Good</div>
-    <div class="card-body">
-      <h5 class="card-title">{{percentage4}}%</h5>
-    </div>
-  </div>
-
-  <div class="card text-white flex-fill bg-primary mb-3 mr-5" style="max-width: 18rem; width: 8rem">
-    <div class="card-header">Very Good</div>
-    <div class="card-body">
-      <h5 class="card-title">{{percentage5}}%</h5>
+      <div class="card bg-light mb-3 ml-2 mr-2" style="width: 18rem;">
+        <div class="card-header bg-primary text-white">Very Good</div>
+        <div class="card-body">
+          <h5 class="card-title">{{percentage5}}%</h5>
+        </div>
+      </div>
     </div>
   </div>
 </div>

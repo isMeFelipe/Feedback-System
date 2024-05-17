@@ -1,14 +1,23 @@
- <body class="text-center">
-    <form class="form-signin" method="post" action="/admin/login/auth">
-      <img class="mb-4" src="{{client.logo}}" alt="" width="72" height="72">
-      <h1 class="h3 mb-3 font-weight-normal">Login</h1>
-        <div style="width: 50vw; margin: auto;">
-            <label for="email" class="sr-only">E-mail</label>
-            <input type="email" class="form-control mt-4" name="email" placeholder="Example@example.com" required autofocus>
-            
-            <label for="password" class="sr-only">Password</label>
-            <input type="password" name="password" class="form-control mt-4" placeholder="Your password" required>
-            <button class="btn btn-lg btn-primary btn-block mt-4" type="submit">Login</button>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="text-center">Admin Login</h1>
         </div>
-    </form>
-  </body>
+        <div class="card-body">
+            <form action="/admin/login/auth" method="post">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" placeholder="Example@example.com" autofocus class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" placeholder="Your password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-block btn-success">Confirm</button>
+                <a href="/" class="btn btn-block btn-danger">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+

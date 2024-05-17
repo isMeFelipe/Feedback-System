@@ -5,14 +5,150 @@
     <meta name="viewport" content="width={device-width}, initial-scale=1.0">
     <link rel="stylesheet" href="/css/bootstrap.css">
     <title>Document</title>
+
+<style>
+    .navbar {
+        background-color: #2071B2; /* Nova cor de fundo da navbar */
+    }
+
+    body {
+        background-color: #2071B2; /* Nova cor de fundo */
+        padding-top: 70px; /* Espaçamento superior */
+    }
+    .jumbotron {
+        background-color: #f8f9fa; /* Cor de fundo do jumbotron - cinza claro */
+        color: black; /* Cor do texto do jumbotron */
+        text-align: center;
+        margin-bottom: 0; /* Remover margem inferior */
+    }
+    .container {
+        background-color: white; /* Cor de fundo do container - branco */
+        border-radius: 10px; /* Arredondamento das bordas do container */
+        padding: 20px; /* Espaçamento interno do container */
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Sombra suave */
+        position: relative; /* Definir posição relativa */
+        z-index: 2; /* Definir na frente da animação */
+    }
+
+    .svg-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1; /* Definir atrás da div container */
+    }
+</style>
+
 </head>
-<body>
+
+<body style="background-color: #2071B2;">
     {{>msg}}
+
+    <nav id="adminNavbar" class="navbar navbar-expand-md navbar-dark fixed-top">
+        <a class="navbar-brand" href="/admin/initialpage/{{hashcode}}">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse align-items-center" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/analysis/{{hashcode}}">Analysis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/settings/{{hashcode}}">Settings</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <nav id="userNavbar" class="navbar navbar-expand-md navbar-dark fixed-top">
+        <a class="navbar-brand" href="/">{{client.name}}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse align-items-center" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <div class="svg-container">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
+            <defs>
+                <linearGradient id="bg">
+                    <stop offset="0%" style="stop-color:rgba(130, 158, 249, 0.06)"></stop>
+                    <stop offset="50%" style="stop-color:rgba(76, 190, 255, 0.6)"></stop>
+                    <stop offset="100%" style="stop-color:rgba(115, 209, 72, 0.2)"></stop>
+                </linearGradient>
+                <path id="wave" fill="url(#bg)" d="M-363.852,502.589c0,0,236.988-41.997,505.475,0
+        s371.981,38.998,575.971,0s293.985-39.278,505.474,5.859s493.475,48.368,716.963-4.995v560.106H-363.852V502.589z" />
+            </defs>
+            <g>
+                <use xlink:href='#wave' opacity=".3">
+                    <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="translate"
+                dur="10s"
+                calcMode="spline"
+                values="270 230; -334 180; 270 230"
+                keyTimes="0; .5; 1"
+                keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+                repeatCount="indefinite" />
+                </use>
+                <use xlink:href='#wave' opacity=".6">
+                    <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="translate"
+                dur="8s"
+                calcMode="spline"
+                values="-270 230;243 220;-270 230"
+                keyTimes="0; .6; 1"
+                keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+                repeatCount="indefinite" />
+                </use>
+                <use xlink:href='#wave' opacty=".9">
+                    <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="translate"
+                dur="6s"
+                calcMode="spline"
+                values="0 230;-140 200;0 230"
+                keyTimes="0; .4; 1"
+                keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+                repeatCount="indefinite" />
+                </use>
+            </g>
+        </svg>
+    </div>
+    
     {{{body}}}
 </body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="/js/bootstrap.js"></script>
+   
+<script>
+    const adminNavbar = document.getElementById('adminNavbar');
+    const userNavbar = document.getElementById('userNavbar');
 
-</html>
+    if ({{isAdmin}}) {
+        userNavbar.style.display = 'none';
+    } else {
+        adminNavbar.style.display = 'none';
 
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

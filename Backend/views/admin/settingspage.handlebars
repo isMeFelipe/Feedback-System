@@ -1,34 +1,18 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+          <h3 class="card-title text-center">Current company information</h3>
+          <img src="{{client.logo}}" class="img-fluid mb-3 mx-auto d-block" alt="Company Logo" title="Logo" style="max-width: 120px;">
+          <h5 class="card-text">Name: {{client.name}}</h5>
+          <h5 class="card-text">Number: {{client.number}}</h5>
+          <h5 class="card-text">E-mail: {{client.email}}</h5>
+          <h5 class="card-text">Address: {{client.address}}</h5>
+          <h5 class="card-text">A user can send more than one feedback: {{client.resend}}</h5>
+          <h5 class="card-text">Feedback Resend Interval: {{client.response_range}} days</h5>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-<ul class="nav nav-pills">
-  <li class="nav-item">
-    <a class="nav-link" style="width=72" href="/admin/initialpage/{{hashcode}}">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/admin/analysis/{{hashcode}}">Analysis</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" href="/admin/settings/{{hashcode}}">Settings</a>
-  </li>
-</ul>
-</nav>
-
-<div class="card">
-    <div class="card-body">
-        <h3>Current company informations</h3>
-        <h4>Logo</h4>
-        <img src="{{client.logo}}" width="120">
-        <h4>Name: {{client.name}}</h4>
-        <h4>Number: {{client.number}}</h4>
-        <h4>E-mail: {{client.email}}</h4>
-        <h4>Address: {{client.address}}</h4>
-        <h4>A user can send more than one feedback: {{client.resend}}</h4> 
-        <h4>Feedback Resend Interval: {{client.response_range}} days</h4>
-        
-        <a href="/admin/settings/update/{{hashcode}}"><button class="btn btn-success">UPDATE</button></a> 
-
+          <div class="text-center">
+            <a href="/admin/settings/update/{{hashcode}}" class="btn btn-success mt-3">UPDATE</a>
+          </div> 
     </div>
-
-
-
+  </div>
 </div>

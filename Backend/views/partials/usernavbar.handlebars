@@ -1,0 +1,29 @@
+    <style>
+        .navbar {
+            background-color: #2071B2; /* Nova cor de fundo da navbar */
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: white; /* Cor dos links da navbar */
+        }
+        .navbar-dark .navbar-toggler-icon {
+            background-color: white; /* Cor do ícone do toggler da navbar */
+        }
+        
+    </style>
+
+ <nav id="userNavbar" class="navbar navbar-expand-md navbar-dark fixed-top">
+        <a class="navbar-brand" href="/">{{client.name}}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
